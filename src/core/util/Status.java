@@ -4,7 +4,7 @@ package core.util;
  * Created by ctare on 2016/10/28.
  */
 public class Status {
-    private int hp = 1,
+    private int maxHp = 1, hp = 1,
             attack = 1, block = 1,
             defence = 1, contact = 1,
             speed = 1, level = 1;
@@ -21,6 +21,19 @@ public class Status {
     public Status levelUp(int n){
         this.setLevel(this.getLevel() + n);
         return this;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public Status setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+        return this;
+    }
+
+    public void fullRecovery(){
+        this.setHp(this.getMaxHp());
     }
 
     public int getAttack() {

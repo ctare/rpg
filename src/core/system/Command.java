@@ -13,6 +13,17 @@ public class Command {
     public Command(Consumer<String[]> consumer){
         this.consumer = consumer;
     }
+    static {
+        new Command(arguments -> {
+            if(arguments.length == 0){
+                commandMap.entrySet().forEach(e -> System.out.printf("%s: %s\n", e.getKey(), e.getValue().help()));
+            }else{
+                for (String argument : arguments) {
+                    System.out.println(Command.get(argument).help());
+                }
+            }
+        }).register("help");
+    }
 
     public final Command register(String cmd){
         commandMap.put(cmd, this);
@@ -42,5 +53,9 @@ public class Command {
                 System.out.println(e);
             }
         }
+    }
+
+    public String help(){
+        return "nothing help.";
     }
 }

@@ -87,7 +87,7 @@ public class ExtStatus extends Status{
     }
 
     private void statusUpdate(){
-        this.setHp(this.calcHp());
+        this.setMaxHp(this.calcHp());
         this.setAttack(this.calcStatus(Status::getAttack));
         this.setBlock(this.calcStatus(Status::getBlock));
         this.setContact(this.calcStatus(Status::getContact));
