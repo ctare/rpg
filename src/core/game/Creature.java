@@ -1,4 +1,4 @@
-package core.object;
+package core.game;
 
 import core.util.Status;
 
@@ -14,11 +14,16 @@ public abstract class Creature {
         this.status = status;
     }
 
-    final public String getName() {
+    public final String getName() {
         return name;
     }
 
-    final public Status getStatus() {
+    public final Status getStatus() {
         return status;
+    }
+
+    public void damage(int hp){
+        int after = status.getHp() - hp;
+        status.setHp(after < 0 ? 0 : after);
     }
 }
