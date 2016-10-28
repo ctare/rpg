@@ -6,8 +6,8 @@ import core.util.Status;
  * Created by ctare on 2016/10/28.
  */
 public abstract class Creature {
-    final String name;
-    final Status status;
+    private final String name;
+    public final Status status;
 
     public Creature(String name, Status status) {
         this.name = name;
@@ -18,12 +18,14 @@ public abstract class Creature {
         return name;
     }
 
-    public final Status getStatus() {
-        return status;
-    }
-
     public void damage(int hp){
         int after = status.getHp() - hp;
         status.setHp(after < 0 ? 0 : after);
+    }
+
+    public int attack(Creature creature){
+        int damage = (int)(((this.status.getLevel() * 2 / 5.0 + 2) * 100 * this.status.getAttack() / creature.status.getDefence() / 50.0 + 2) * (Math.random() * 15 + 85) / 100.0);
+        creature.damage(damage);
+        return damage;
     }
 }
