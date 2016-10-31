@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 public class Command {
     private final static HashMap<String, Command> commandMap = new HashMap<>();
     private final Consumer<String[]> consumer;
+    private static boolean run = true;
     public Command(Consumer<String[]> consumer){
         this.consumer = consumer;
     }
@@ -42,7 +43,8 @@ public class Command {
 
     public static void loop(){
         Scanner sc = new Scanner(System.in);
-        while(true){
+        run = true;
+        while(run){
             String[] line = sc.nextLine().split(" ");
             if(line[0].equals("exit")) break;
             String[] arguments = new String[line.length - 1];
@@ -53,6 +55,10 @@ public class Command {
                 System.out.println(e);
             }
         }
+    }
+
+    public final static void exit(){
+        run = false;
     }
 
     public String help(){

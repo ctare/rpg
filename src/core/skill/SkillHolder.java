@@ -4,6 +4,7 @@ import core.game.Entity;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by ctare on 2016/10/29.
@@ -11,23 +12,33 @@ import java.util.HashMap;
 public class SkillHolder {
     private final HashMap<String, Skill> skills = new HashMap<>();
     private Entity caller;
+    private Random random = new Random();
     public SkillHolder(Entity caller){
         this.caller = caller;
     }
 
     public void call(String name){
-        if(skills.get(name) == null) throw new SkillNotFoundException(name);
-        skills.get(name).call();
+        get(name).call();
     }
 
     public void call(String name, Entity target){
-        if(skills.get(name) == null) throw new SkillNotFoundException(name);
-        skills.get(name).call(target);
+        get(name).call(target);
     }
 
-    public void set(Skill skill){
-        skill.setCaller(caller);
-        skills.put(skill.getName(), skill);
+    public void callRandom(Entity target){
+        ((Skill)skills.values().toArray()[(int)random.nextInt(skills.size())]).call(target);
+    }
+
+    public void set(Skill... skill){
+        for (Skill s : skill) {
+            s.setCaller(caller);
+            skills.put(s.getName(), s);
+        }
+    }
+
+    public Skill get(String name){
+        if(skills.get(name) == null) throw new SkillNotFoundException(name);
+        return skills.get(name);
     }
 
     public Collection<Skill> all(){

@@ -1,5 +1,7 @@
 package core.game;
 
+import core.system.Command;
+
 /**
  * Created by ctare on 2016/10/28.
  */
@@ -8,12 +10,13 @@ public enum World{
     private boolean run = true;
     private Field now;
     public final Updater updater = new Updater();
+    public final Party players = new Party();
 
-    public Field getNow() {
+    public final Field getNow() {
         return now;
     }
 
-    public void setNow(Field now) {
+    public final void setNow(Field now) {
         this.now = now;
     }
 
@@ -29,8 +32,14 @@ public enum World{
             }
         }
 
-        public void kill(){
+        public final void kill(){
             run = false;
         }
+    }
+
+    public final void gameOver(){
+        System.out.println("game over...");
+        Command.exit();
+        updater.kill();
     }
 }

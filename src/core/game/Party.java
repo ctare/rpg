@@ -8,10 +8,9 @@ import java.util.HashMap;
  */
 public class Party {
     private final HashMap<String, Creature> member = new HashMap<>();
+    private int size = 0;
     public Party(Creature... creatures){
-        for (Creature creature : creatures) {
-            member.put(creature.getName(), creature);
-        }
+        for (Creature creature : creatures) add(creature);
     }
 
     public Creature get(String name){
@@ -20,7 +19,16 @@ public class Party {
 
     public Party add(Creature creature){
         member.put(creature.getName(), creature);
+        size++;
         return this;
+    }
+
+    public boolean contains(String name){
+        return member.containsKey(name);
+    }
+
+    public int size(){
+        return size;
     }
 
     public Collection<Creature> all(){

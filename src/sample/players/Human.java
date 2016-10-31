@@ -1,13 +1,13 @@
 package sample.players;
 
-import core.game.Player;
+import core.game.Creature;
 import core.util.ExtStatus;
 import core.util.Status;
 
 /**
  * Created by ctare on 2016/10/28.
  */
-public class Human extends Player{
+public class Human extends Creature {
     public Human(String name) {
         super(name, new ExtStatus(new Status()
                 .setHp      (72 )

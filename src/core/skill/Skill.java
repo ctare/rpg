@@ -22,6 +22,7 @@ public abstract class Skill {
     };
 
     public void call(Entity target){
+        if(target == null) call();
         System.out.println("error: don't need target");
     };
 

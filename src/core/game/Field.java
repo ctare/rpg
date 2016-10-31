@@ -2,6 +2,7 @@ package core.game;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 /**
  * Created by ctare on 2016/10/28.
@@ -53,5 +54,9 @@ public class Field implements Entity{
 
     public Collection<Entity> all(){
         return entities.values();
+    }
+
+    public <T> Stream<T> filter(Class<T> clazz){
+        return entities.values().stream().filter(clazz::isInstance).map(clazz::cast);
     }
 }

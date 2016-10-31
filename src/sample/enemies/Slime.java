@@ -1,13 +1,13 @@
 package sample.enemies;
 
-import core.game.Enemy;
+import core.game.Creature;
 import core.util.ExtStatus;
 import core.util.Status;
 
 /**
  * Created by ctare on 2016/10/28.
  */
-public class Slime extends Enemy{
+public class Slime extends Creature {
     public Slime(String name) {
         super(name, new ExtStatus(new Status()
                 .setHp      (80)

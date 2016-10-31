@@ -18,11 +18,16 @@ public abstract class CreaturesSkill extends Skill{
     public void setCaller(Entity caller) {
         if(caller instanceof Creature) this.caller = (Creature) caller;
     }
+    public Creature getCaller(){
+        return caller;
+    }
 
     @Override
     public void call(Entity target) {
         if(target instanceof Creature){
-            System.out.printf("success! damage %d\n", caller.attack((Creature)target, this));
+            System.out.printf("%s!! %s -> %s\nsuccess! damage %d\n", this.getName(), getCaller().getName(), target.getName(), getCaller().attack((Creature)target, this));
+        }else{
+            System.out.println("error: target needs to be creature");
         }
     }
 }

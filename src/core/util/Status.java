@@ -7,7 +7,8 @@ public class Status {
     private int maxHp = 1, hp = 1,
             attack = 1, block = 1,
             defence = 1, contact = 1,
-            speed = 1, level = 1;
+            speed = 1, level = 1, exp, maxExp;
+    private double expCoefficient = 1.0;
 
     public int getLevel() {
         return level;
@@ -88,5 +89,41 @@ public class Status {
     public Status setHp(int hp) {
         this.hp = hp;
         return this;
+    }
+
+    public Status setExpCoefficient(double expCoefficient) {
+        this.expCoefficient = expCoefficient;
+        return this;
+    }
+
+    public double getExpCoefficient() {
+        return expCoefficient;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public Status setExp(int exp){
+        this.exp = exp;
+        return this;
+    }
+
+    public Status toMaxExp(){
+        this.setExp(0);
+        this.addExp(this.getMaxExp());
+        return this;
+    }
+
+    public void addExp(int exp) {
+        this.exp += exp;
+    }
+
+    public int getMaxExp() {
+        return this.maxExp;
+    }
+
+    public void setMaxExp(int maxExp) {
+        this.maxExp = maxExp;
     }
 }

@@ -93,6 +93,7 @@ public class ExtStatus extends Status{
         this.setContact(this.calcStatus(Status::getContact));
         this.setDefence(this.calcStatus(Status::getDefence));
         this.setSpeed(this.calcStatus(Status::getSpeed));
+        this.setMaxExp(this.calcExp());
     }
 
     private int calcHp(){
@@ -101,5 +102,19 @@ public class ExtStatus extends Status{
 
     private int calcStatus(Function<Status, Integer> get){
         return (int)((((get.apply(hide) * 2 + get.apply(identity) + get.apply(bonus) / 4.0) * this.getLevel() / 100.0) + 5) * 1.0);
+    }
+
+    private int calcExp(){
+        return (int)(Math.pow(1.5, this.getLevel()) * this.getExpCoefficient());
+    }
+
+    public void addExp(int exp) {
+        this.setExp(this.getExp() + exp);
+        int count = 0;
+        while(this.getExp() >= this.getMaxExp()){
+            count++;
+            this.levelUp(1);
+        }
+        if(count != 0) System.out.printf("level up!! %d\n", count);
     }
 }
