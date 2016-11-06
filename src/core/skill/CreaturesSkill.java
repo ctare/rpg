@@ -2,6 +2,7 @@ package core.skill;
 
 import core.game.Creature;
 import core.game.Entity;
+import core.skill.target.Enemy;
 
 /**
  * Created by ctare on 2016/10/29.
@@ -9,6 +10,9 @@ import core.game.Entity;
 public abstract class CreaturesSkill extends Skill{
     private Creature caller;
     public final int power;
+    {
+        target = new Enemy();
+    }
 
     public CreaturesSkill(String name, int power) {
         super(name);

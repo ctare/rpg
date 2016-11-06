@@ -2,6 +2,11 @@ package core.game;
 
 import core.system.Command;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Created by ctare on 2016/10/28.
  */
@@ -11,6 +16,14 @@ public enum World{
     private Field now;
     public final Updater updater = new Updater();
     public final Party players = new Party();
+
+    public final Map<String, Entity> getAll() {
+        return Stream
+                .concat(
+                        players.all().stream().map(v -> (Entity) v),
+                        now.filter(Entity.class))
+                .collect(Collectors.toMap(Entity::getName, Function.identity()));
+    }
 
     public final Field getNow() {
         return now;
