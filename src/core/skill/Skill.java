@@ -1,6 +1,7 @@
 package core.skill;
 
 import core.game.Entity;
+import core.skill.target.Target;
 
 /**
  * Created by ctare on 2016/10/28.
@@ -8,6 +9,7 @@ import core.game.Entity;
 public abstract class Skill {
     private final String name;
     public Entity caller;
+    public Target target = new core.skill.target.Entity();
 
     public void setCaller(Entity caller) {
         this.caller = caller;
@@ -22,7 +24,6 @@ public abstract class Skill {
     };
 
     public void call(Entity target){
-        if(target == null) call();
         System.out.println("error: don't need target");
     };
 

@@ -6,14 +6,9 @@ import core.game.Entity;
 /**
  * Created by ctare on 2016/10/30.
  */
-public class HealSkill extends CreaturesSkill{
+public class HealSkill extends BufSkill{
     public HealSkill(String name, int power) {
         super(name, power);
-    }
-
-    @Override
-    public void call() {
-        call(getCaller());
     }
 
     @Override
