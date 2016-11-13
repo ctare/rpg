@@ -1,15 +1,15 @@
 package core.game;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 /**
  * Created by ctare on 2016/10/28.
  */
 public class Field implements Entity{
-    private HashMap<String, Entity> entities = new HashMap<>();
+    private TreeMap<String, Entity> entities = new TreeMap<>();
     private String name;
     private Field owner = this;
     public Buttle buttle = new Buttle();

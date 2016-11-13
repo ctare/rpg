@@ -44,4 +44,8 @@ public class SkillHolder {
     public Collection<Skill> all(){
         return skills.values();
     }
+
+    public Skill[] toArray(){
+        return this.all().toArray(new Skill[0]);
+    }
 }

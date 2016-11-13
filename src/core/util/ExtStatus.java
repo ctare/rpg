@@ -8,7 +8,7 @@ import java.util.function.Function;
 /**
  * Created by ctare on 2016/10/28.
  */
-public class ExtStatus extends Status{
+public class ExtStatus extends Status {
     private final Status hide;
     private final Status identity;
     public final Status bonus = new BonusStatus();

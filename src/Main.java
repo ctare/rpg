@@ -8,6 +8,7 @@ import core.skill.ContactSkill;
 import core.skill.HealSkill;
 import core.system.Command;
 import core.system.NullOutputStream;
+import core.util.create.CreatureCreator;
 import sample.enemies.Pig;
 import sample.enemies.Slime;
 import sample.players.Human;
@@ -19,37 +20,24 @@ import java.util.HashMap;
  * Created by ctare on 2016/10/28.
  */
 public class Main {
-    public static Creature createCreature(Creature creature, int level, core.skill.Skill... skills){
-        creature.status.setLevel(level - 1).toMaxExp().fullRecovery();
-        creature.skills.set(skills);
-        return creature;
-    }
 
     public static void main(String[] args) {
         Field field = new Field("desert");
         PrintStream std = System.out;
         System.setOut(new NullOutputStream());
         field.add(new Field("oasis"){{
-            add(createCreature(new Pig("pigA"), 10, new AttackSkill("attack", 40)));
-            add(createCreature(new Pig("pigB"), 10, new AttackSkill("attack", 40)));
-            add(createCreature(new Pig("pigC"), 10, new AttackSkill("attack", 40)));
-
-            add(createCreature(new Slime("slimeA"), 15, new ContactSkill("attack", 40)));
-            add(createCreature(new Slime("slimeB"), 15, new ContactSkill("attack", 40)));
+            CreatureCreator.once(3, () -> CreatureCreator.createCreature(new Pig("pig"), 10, new AttackSkill("attack", 40))).forEach(this::add);
+            CreatureCreator.once(4, () -> CreatureCreator.createCreature(new Slime("slime"), 15, new ContactSkill("contact", 40))).forEach(this::add);
         }});
         field.add(new Field("forest"){{
-            Creature c;
-            add(createCreature(new Slime("slimeA"), 20, new ContactSkill("attack", 40)));
-            add(createCreature(new Slime("slimeB"), 20, new ContactSkill("attack", 40)));
-            add(createCreature(new Slime("slimeC"), 20, new ContactSkill("attack", 40)));
-            add(createCreature(new Slime("slimeD"), 20, new ContactSkill("attack", 40)));
+            CreatureCreator.once(5, () -> CreatureCreator.createCreature(new Slime("slime"), 20, new ContactSkill("contact", 40))).forEach(this::add);
             Field f = new Field("ext-forest");
             f.add(f);
             add(f);
         }});
 
-        field.add(createCreature(new Pig("pig"), 10, new AttackSkill("attack", 40)));
-        field.add(createCreature(new Slime("slime"), 10, new ContactSkill("attack", 40)));
+        field.add(CreatureCreator.createCreature(new Pig("pig"), 10, new AttackSkill("attack", 40)));
+        field.add(CreatureCreator.createCreature(new Slime("slime"), 10, new ContactSkill("attack", 40)));
 
         Creature hero = new Human("Alice");
         hero.status.setLevel(10).fullRecovery();
